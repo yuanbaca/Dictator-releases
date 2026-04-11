@@ -18,8 +18,8 @@ Voice-to-text for Windows — dictate from your computer with a hotkey, or from 
   - **Email**: Casual email, Professional email
   - **Other formats**: Formal letter, Bullet summary, Meeting notes, Documentation, Message
   - Fully customizable — edit the prompt behind any format preset
+- **Custom hotkeys** — record, inject text, and read-aloud each have their own global hotkey. Choose from presets or set any key combination you want. Works from any app without switching windows.
 - **Neural text-to-speech** — highlight text anywhere and hear it read aloud using [Piper](https://github.com/rhasspy/piper) neural voices or Windows SAPI. 10+ downloadable voice models.
-- **Configurable global hotkeys** — record, inject text, and read-aloud each have their own hotkey. Works from any app without switching windows.
 - **System tray control** — left-click to toggle auto-format, right-click for format presets with grouped submenus
 - **Text injection** via clipboard paste or simulated keystrokes
 - **Auto-space** after each dictation (toggleable)
@@ -27,6 +27,7 @@ Voice-to-text for Windows — dictate from your computer with a hotkey, or from 
 - **Phone connection options**:
   - **LAN** (same WiFi) — works immediately
   - **Tailscale** — trusted HTTPS from anywhere, no browser warnings
+- **Portable** — no installer, just an exe. Move it anywhere and it keeps working (see below).
 - **First-run model download** — the app downloads what it needs on first launch, no manual setup
 - **Check for updates** built in
 
@@ -44,10 +45,30 @@ Voice-to-text for Windows — dictate from your computer with a hotkey, or from 
 ## Getting Started
 
 1. Download the latest `.zip` from the [Releases page](https://github.com/yuanbaca/Dictator-releases/releases/latest)
-2. Extract anywhere on your PC
+2. Extract anywhere on your PC (e.g. `C:\Tools\Dictator\`)
 3. Run `dictator.exe`
 4. The app downloads required models on first launch (~150 MB for speech-to-text)
 5. Press `Ctrl+Shift+Space` to start dictating — or open the phone URL shown in the app
+
+## Moving the App
+
+Dictator is fully portable. If you move the exe to a new folder:
+
+- **Models stay with the exe** — the `models/` folder next to `dictator.exe` is where downloaded models live. Move the whole folder together.
+- **Start with Windows auto-repairs** — if you enabled autostart and then move the exe, Dictator detects the stale path on next launch and automatically updates the registry to the new location. No manual fix needed.
+- **Manual fix (if needed)** — if autostart stops working after a move, just toggle "Start with Windows" off and back on in Settings. Or open the Registry Editor (`Win+R` → `regedit`) and update the path at:
+  ```
+  HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run\Dictator
+  ```
+
+## Updating
+
+1. Open Settings in Dictator and click **Check for Updates**
+2. If an update is available, click **Copy link** — the download URL is copied to your clipboard
+3. Paste the link in your browser and download the new zip
+4. Close Dictator (tray icon → Quit)
+5. Replace `dictator.exe` with the new one from the zip
+6. Relaunch — your settings, models, and custom hotkeys are preserved
 
 ## Full Uninstall
 

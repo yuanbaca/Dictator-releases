@@ -65,3 +65,9 @@ Dictator is portable (no installer), so removing it means deleting the files it 
    - Navigate to: `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run`
    - Delete the entry named `Dictator`
 5. **That's it** — Dictator doesn't install services, drivers, or modify system files.
+
+---
+
+## Disclaimer
+
+This project was built with AI assistance ([Claude](https://claude.ai/)). The app icon and visual assets are AI-generated art.

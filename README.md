@@ -29,6 +29,9 @@ Voice-to-text for Windows — dictate from your computer with a hotkey, or from 
 - **Phone connection options**:
   - **LAN** (same WiFi) — works immediately
   - **Tailscale** — trusted HTTPS from anywhere, no browser warnings
+- **Single instance** — only one copy of the app can run at a time. If you try to launch a second, it tells you to check the system tray.
+- **Start minimized** — when set to launch at login, the app starts hidden in the system tray. Manual launches open the window normally.
+- **Custom LLM models** — drop any GGUF model into the `models/` folder and it auto-appears in Settings with a purple "Custom" badge. Chat format auto-detected from filename.
 - **Portable** — no installer, just an exe. Move it anywhere and it keeps working (see below).
 - **First-run model download** — the app downloads what it needs on first launch, no manual setup
 - **Check for updates** built in

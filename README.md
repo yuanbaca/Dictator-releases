@@ -23,6 +23,7 @@ Voice-to-text for Windows — dictate from your computer with a hotkey, or from 
 - **System tray control** — left-click to toggle auto-format, right-click for format presets with grouped submenus
 - **Text injection** via clipboard paste or simulated keystrokes
 - **Auto-space** after each dictation (toggleable)
+- **Progress beeps** — optional periodic chime during transcription and AI formatting so you know the app is working (toggleable under Sound Effects)
 - **Escape key** cancels recording or stops TTS — works globally, even when Dictator isn't focused
 - **Phone connection options**:
   - **LAN** (same WiFi) — works immediately
@@ -30,6 +31,36 @@ Voice-to-text for Windows — dictate from your computer with a hotkey, or from 
 - **Portable** — no installer, just an exe. Move it anywhere and it keeps working (see below).
 - **First-run model download** — the app downloads what it needs on first launch, no manual setup
 - **Check for updates** built in
+
+## AI Models
+
+Dictator uses local AI models — everything runs on your machine, nothing is sent to the cloud.
+
+### Speech-to-text (Whisper)
+The app downloads a Whisper model on first launch (~150 MB for the base English model). Larger models are available in Settings for better accuracy at the cost of speed.
+
+### Text formatting (LLM)
+When you enable auto-format, the app downloads a ~2 GB language model (Phi-3 Mini Q4). This model reformats your dictated speech — fixing grammar, removing filler words, structuring as emails, etc.
+
+### Custom LLM models
+You can use your own GGUF models for text formatting:
+
+1. Drop any `.gguf` file into the `models/` folder next to `dictator.exe`
+2. The app auto-detects it and adds it to the model list in Settings
+3. Chat format is auto-detected from the filename, or you can override it in Settings
+
+**Supported chat formats:**
+
+| Format | Models | Auto-detected when filename contains |
+|---|---|---|
+| **Phi-3** | Phi-3, Phi-3.5 | `phi` (default if no match) |
+| **Llama 3** | Llama 3, Llama 3.1 | `llama` |
+| **ChatML** | Mistral, Qwen, Gemma, and many others | `mistral`, `qwen`, `gemma`, `chatml` |
+
+**Tips:**
+- Q4_K_M quantizations offer the best balance of speed and quality
+- Smaller models (1-4B parameters) are faster but less accurate
+- The app validates GGUF files before loading — corrupted or non-GGUF files are rejected
 
 ## In Progress
 

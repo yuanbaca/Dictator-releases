@@ -92,6 +92,7 @@ You can find additional Piper voices at [rhasspy/piper](https://github.com/rhass
 
 - **GPU acceleration** — graphics card support via Vulkan for faster transcription and LLM formatting. Currently functional as a build flag, being refined for automatic detection and seamless fallback.
 - **Live streaming transcription** — real-time text appearing at your cursor as you speak, instead of waiting until you stop recording.
+- **More cloud TTS providers** — additional cloud voice services beyond Minimax, with API key support for each.
 
 ## Requirements
 

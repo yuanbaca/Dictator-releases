@@ -19,7 +19,8 @@ Voice-to-text for Windows — dictate from your computer with a hotkey, or from 
   - **Other formats**: Formal letter, Bullet summary, Meeting notes, Documentation, Message
   - Fully customizable — edit the prompt behind any format preset
 - **Custom hotkeys** — record, inject text, and read-aloud each have their own global hotkey. Choose from presets or set any key combination you want. Works from any app without switching windows.
-- **Neural text-to-speech** — highlight text anywhere and hear it read aloud using [Piper](https://github.com/rhasspy/piper) neural voices or Windows SAPI. 10+ downloadable voice models.
+- **Neural text-to-speech** — highlight text anywhere and hear it read aloud using [Piper](https://github.com/rhasspy/piper) neural voices or Windows SAPI. 10+ downloadable voice models. Supports custom Piper voice files — drop `.onnx` + `.onnx.json` into the voices folder and they auto-appear.
+- **Silence detection** — if you stop speaking during a recording, the app notices and shows a reminder with your hotkey to stop. Configurable threshold (10s–60s) or disable entirely.
 - **System tray control** — left-click to toggle auto-format, right-click for format presets with grouped submenus
 - **Text injection** via clipboard paste or simulated keystrokes
 - **Auto-space** after each dictation (toggleable)
@@ -31,6 +32,18 @@ Voice-to-text for Windows — dictate from your computer with a hotkey, or from 
 - **Portable** — no installer, just an exe. Move it anywhere and it keeps working (see below).
 - **First-run model download** — the app downloads what it needs on first launch, no manual setup
 - **Check for updates** built in
+
+## Minimum Hardware
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| **CPU** | Any 64-bit processor | 2015 or newer |
+| **RAM** | 4 GB | 8 GB (if using AI formatting) |
+| **Disk** | ~200 MB (app + Whisper model) | ~2.5 GB additional for AI formatting model |
+| **GPU** | None required | Vulkan-compatible (for faster transcription) |
+| **OS** | Windows 10 | Windows 10/11 |
+
+The base app (speech-to-text only) runs comfortably on modest hardware. AI text formatting loads a ~2 GB language model into RAM, so 8 GB is recommended if you enable that feature.
 
 ## AI Models
 
@@ -61,6 +74,15 @@ You can use your own GGUF models for text formatting:
 - Q4_K_M quantizations offer the best balance of speed and quality
 - Smaller models (1-4B parameters) are faster but less accurate
 - The app validates GGUF files before loading — corrupted or non-GGUF files are rejected
+
+### Custom TTS voices
+You can add your own Piper neural voice files:
+
+1. Place a `.onnx` voice model and its matching `.onnx.json` config in the `models/piper-voices/` folder
+2. They auto-appear in the Piper voices list in Settings with a "Custom" badge
+3. Click "Use" to select, or "Delete" to remove
+
+You can find additional Piper voices at [rhasspy/piper](https://github.com/rhasspy/piper/blob/master/VOICES.md).
 
 ## In Progress
 

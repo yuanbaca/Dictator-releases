@@ -132,18 +132,20 @@ Dictator is fully portable. If you move the exe to a new folder:
 
 Dictator is portable (no installer), so removing it means deleting the files it created:
 
-1. **Close Dictator** — right-click the system tray icon → Quit
-2. **Delete the app folder** — wherever you extracted the zip (contains `dictator.exe`, `models/`, `README.txt`)
-3. **Delete app data** — Tauri stores webview cache here:
+1. **Before closing** — open Settings and turn off "Start with Windows" if it's enabled. This removes the autostart registry entry for you automatically.
+2. **Close Dictator** — right-click the system tray icon → Quit
+3. **Delete the app folder** — wherever you extracted the zip (contains `dictator.exe`, `models/`, `README.txt`)
+4. **Delete app data** — Tauri stores webview cache here:
    ```
    %LOCALAPPDATA%\com.dictator.app
    ```
    Open File Explorer, paste that path in the address bar, and delete the folder.
-4. **Remove autostart entry** (if you enabled "Start with Windows"):
-   - Press `Win+R`, type `regedit`, press Enter
-   - Navigate to: `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run`
-   - Delete the entry named `Dictator`
 5. **That's it** — Dictator doesn't install services, drivers, or modify system files.
+
+If you already closed the app without disabling autostart, you can remove the registry entry manually:
+- Press `Win+R`, type `regedit`, press Enter
+- Navigate to: `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run`
+- Delete the entry named `Dictator`
 
 ---
 

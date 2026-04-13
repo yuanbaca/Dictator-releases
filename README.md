@@ -14,17 +14,18 @@ Voice-to-text for Windows — dictate from your computer with a hotkey, or from 
 - **Desktop hotkey dictation** — press a hotkey, speak into your PC mic, press again. Text appears at your cursor in any app: Notepad, Word, browser, chat, IDE, anywhere.
 - **Phone-as-wireless-mic** — open a URL on your phone, tap the mic button, speak. Your phone sends audio over your local network and text appears on your PC.
 - **AI text formatting** — optional local LLM cleans up, rephrases, or reformats your dictation before insertion. Multiple presets:
-  - **Cleanup** (3 tiers): Light cleanup (typos only), Clean up (grammar + fillers), Strict cleanup (full rewrite for clarity)
+  - **Cleanup** (3 tiers): Light cleanup (typos + repeated words from stumbling), Clean up (grammar + fillers), Strict cleanup (full rewrite for clarity)
   - **Email**: Casual email, Professional email
   - **Other formats**: Formal letter, Bullet summary, Meeting notes, Documentation, Message
   - Fully customizable — edit the prompt behind any format preset
-- **Custom hotkeys** — record, inject text, and read-aloud each have their own global hotkey. Choose from presets or set any key combination you want. Works from any app without switching windows.
-- **Neural text-to-speech** — highlight text anywhere and hear it read aloud using [Piper](https://github.com/rhasspy/piper) neural voices or Windows SAPI. 10+ downloadable voice models. Supports custom Piper voice files — drop `.onnx` + `.onnx.json` into the voices folder and they auto-appear.
+- **Custom hotkeys** — record, inject text, read-aloud, and reformat each have their own global hotkey. Choose from presets or set any key combination you want. Works from any app without switching windows.
+- **Highlight & reformat** — select text anywhere, press a hotkey, and the LLM reformats it in place. Limited to cleanup formats (Light / Clean / Strict) for focused, predictable edits.
+- **Neural text-to-speech** — highlight text anywhere and hear it read aloud using [Piper](https://github.com/rhasspy/piper) neural voices, Windows SAPI, or [Minimax](https://www.minimax.io/) cloud voices (API key required). 10+ downloadable Piper models, 18 Minimax cloud voices. Supports custom Piper voice files — drop `.onnx` + `.onnx.json` into the voices folder and they auto-appear.
 - **Silence detection** — if you stop speaking during a recording, the app notices and shows a reminder with your hotkey to stop. Configurable threshold (10s–60s) or disable entirely.
-- **System tray control** — left-click to toggle auto-format, right-click for format presets with grouped submenus
+- **System tray control** — left-click to toggle auto-format, right-click for format presets with grouped submenus. "Cancel Recording" only appears when a recording is in progress.
 - **Text injection** via clipboard paste or simulated keystrokes
 - **Auto-space** after each dictation (toggleable)
-- **Progress beeps** — optional periodic chime during transcription and AI formatting so you know the app is working (toggleable under Sound Effects)
+- **Progress beeps** — optional periodic chime during transcription, AI formatting, reformat processing, and cloud TTS loading so you know the app is working (toggleable under Sound Effects)
 - **Escape key** cancels recording or stops TTS — works globally, even when Dictator isn't focused
 - **Phone connection options**:
   - **LAN** (same WiFi) — works immediately

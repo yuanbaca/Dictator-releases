@@ -44,10 +44,10 @@ Voice-to-text for Windows — dictate from your computer with a hotkey, or from 
 | **CPU** | Any 64-bit processor | 2015 or newer |
 | **RAM** | 4 GB | 8 GB (if using AI formatting) |
 | **Disk** | ~200 MB (app + Whisper model) | ~2.5 GB additional for AI formatting model |
-| **GPU** | None required | Vulkan-compatible (for faster transcription) |
+| **GPU** | None required | Vulkan-compatible with 6+ GB VRAM (for faster transcription and formatting) |
 | **OS** | Windows 10 | Windows 10/11 |
 
-The base app (speech-to-text only) runs comfortably on modest hardware. AI text formatting loads a ~2 GB language model into RAM, so 8 GB is recommended if you enable that feature.
+The base app (speech-to-text only) runs comfortably on modest hardware. AI text formatting loads a ~2 GB language model into RAM, so 8 GB is recommended if you enable that feature. GPU acceleration is automatic when a compatible GPU is detected, but the app works fine without one.
 
 ## AI Models
 
@@ -88,9 +88,31 @@ You can add your own Piper neural voice files:
 
 You can find additional Piper voices at [rhasspy/piper](https://github.com/rhasspy/piper/blob/master/VOICES.md).
 
+### GPU Acceleration
+
+Dictator automatically uses your GPU via [Vulkan](https://www.vulkan.org/) for both speech-to-text (Whisper) and AI text formatting (LLM). If a compatible GPU is detected, it's used automatically — no configuration needed. If not, the app falls back to CPU.
+
+GPU acceleration is currently in **beta**. It works well on tested hardware (NVIDIA RTX series), but there are known limitations:
+
+**What works well:**
+- NVIDIA GPUs with 6+ GB VRAM and recent drivers
+- Both Whisper transcription and LLM formatting offloaded to GPU
+- Automatic CPU fallback if GPU initialization fails
+
+**Known limitations:**
+- **Low VRAM GPUs** (4 GB or less) — the LLM model alone needs ~3 GB of VRAM. GPUs without enough memory may fail to load the model or produce errors. The app falls back to CPU, but you may see a delay during the failed GPU attempt.
+- **AMD and Intel GPUs** — Vulkan compute support varies. These GPUs may work but are less tested than NVIDIA. Performance may be slower than expected, or GPU initialization may fail silently and fall back to CPU.
+- **Integrated graphics only** (Intel UHD, Intel Iris) — most integrated GPUs lack the VRAM and compute power for LLM inference. The app will fall back to CPU on these systems.
+- **Multi-GPU laptops** (NVIDIA Optimus) — the app may select the integrated GPU instead of the discrete GPU. If GPU performance seems slow, try updating your graphics drivers or setting Dictator to use the high-performance GPU in Windows Graphics Settings.
+- **GPU contention** — if your GPU is already under heavy load (gaming, rendering), there may not be enough VRAM available. The app should fall back to CPU, but you may notice slower startup.
+
+**If something goes wrong:**
+- Open Settings and enable **Force CPU mode** — this disables GPU for both Whisper and LLM and reloads models on CPU
+- Force CPU mode is the quickest way to rule out GPU-related issues
+
 ## In Progress
 
-- **GPU acceleration** — graphics card support via Vulkan for faster transcription and LLM formatting. Currently functional as a build flag, being refined for automatic detection and seamless fallback.
+- **GPU acceleration (beta)** — Vulkan GPU support for faster transcription and LLM formatting. Automatic detection with CPU fallback. See [GPU Acceleration](#gpu-acceleration) for details and known limitations.
 - **Live streaming transcription** — real-time text appearing at your cursor as you speak, instead of waiting until you stop recording.
 - **More cloud TTS providers** — additional cloud voice services beyond Minimax, with API key support for each.
 

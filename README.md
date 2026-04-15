@@ -2,40 +2,70 @@
 
 **What you say goes... (to your cursor)**
 
-Voice-to-text for Windows — dictate from your computer with a hotkey, or from your phone as a wireless mic. Text appears wherever your cursor is. **By default, everything runs locally on your machine — no cloud, no accounts, no data leaves your network.** Cloud text-to-speech (Minimax) is available as an opt-in feature if you supply your own API key; when configured, TTS requests for that voice go to Minimax instead of staying local.
+Voice-to-text for Windows. Press a hotkey, speak, text appears at your cursor — in any app. No subscription. No account. No data leaves your machine. And if you want, your phone can be the microphone.
 
 [**Download the latest release**](https://github.com/yuanbaca/Dictator-releases/releases/latest)
 
 ---
 
+## Why Dictator?
+
+- **Free.** No subscription, no account, no telemetry. The app runs on your machine, the models live on your disk, your voice data stays local.
+- **Local-first by default.** Speech-to-text and AI formatting both run on your machine. The only cloud path is opt-in (Minimax TTS, your own API key, off by default).
+- **Your phone is the microphone.** Unique to Dictator. Open the URL shown in the app on your phone's browser, tap mic, speak. Works over your WiFi or Tailscale. Nothing to install on the phone.
+- **Portable single .exe.** No installer, no Python, no CUDA. Drop it anywhere and it keeps working.
+- **Works wherever your cursor is.** Any app that accepts keyboard input — Notepad, Word, browsers, chat apps, IDEs, agentic coding tools. No plugins, no integrations, just typing.
+
+---
+
+## Two Ways to Dictate
+
+### From your computer (hotkey)
+Press `Ctrl+Shift+Space` (or your own hotkey), speak into your PC mic, press again. Text appears at your cursor.
+
+### From your phone (wireless mic)
+Open the URL shown in the app on your phone's browser. Tap the mic button and speak. Audio streams over your local network and text appears on your PC. No phone app — just a bookmark.
+
+---
+
 ## Features
 
-- **Local speech-to-text** — powered by [whisper.cpp](https://github.com/ggerganov/whisper.cpp), no internet required. Multiple model sizes from tiny to large.
-- **Desktop hotkey dictation** — press a hotkey, speak into your PC mic, press again. Text appears at your cursor in any app: Notepad, Word, browser, chat, IDE, anywhere.
-- **Phone-as-wireless-mic** — open a URL on your phone, tap the mic button, speak. Your phone sends audio over your local network and text appears on your PC.
-- **AI text formatting** — optional local LLM cleans up, rephrases, or reformats your dictation before insertion. Multiple presets:
-  - **Cleanup** (3 tiers): Light cleanup (typos + repeated words from stumbling), Clean up (grammar + fillers), Strict cleanup (full rewrite for clarity)
-  - **Email**: Casual email, Professional email
-  - **Other formats**: Formal letter, Bullet summary, Meeting notes, Documentation, Message
-  - Fully customizable — edit the prompt behind any format preset
-- **Custom hotkeys** — record, inject text, read-aloud, and reformat each have their own global hotkey. Choose from presets or set any key combination you want. Works from any app without switching windows.
-- **Highlight & reformat** — select text anywhere, press a hotkey, and the LLM reformats it in place. Limited to cleanup formats (Light / Clean / Strict) for focused, predictable edits.
-- **Neural text-to-speech** — highlight text anywhere and hear it read aloud using [Piper](https://github.com/rhasspy/piper) neural voices, Windows SAPI, or [Minimax](https://www.minimax.io/) cloud voices (API key required). 10+ downloadable Piper models, 18 Minimax cloud voices. Supports custom Piper voice files — drop `.onnx` + `.onnx.json` into the voices folder and they auto-appear.
-- **Silence detection** — if you stop speaking during a recording, the app notices and shows a reminder with your hotkey to stop. Configurable threshold (10s–60s) or disable entirely.
-- **System tray control** — left-click to toggle auto-format, right-click for format presets with grouped submenus. "Cancel Recording" only appears when a recording is in progress.
-- **Text injection** via clipboard paste or simulated keystrokes
-- **Auto-space** after each dictation (toggleable)
-- **Progress beeps** — optional periodic chime during transcription, AI formatting, reformat processing, and cloud TTS loading so you know the app is working (toggleable under Sound Effects)
-- **Escape key** cancels recording or stops TTS — works globally, even when Dictator isn't focused
-- **Phone connection options**:
-  - **LAN** (same WiFi) — works immediately
-  - **Tailscale** — trusted HTTPS from anywhere, no browser warnings
-- **Single instance** — only one copy of the app can run at a time. If you try to launch a second, it tells you to check the system tray.
-- **Start minimized** — when set to launch at login, the app starts hidden in the system tray. Manual launches open the window normally.
-- **Custom LLM models** — drop any GGUF model into the `models/` folder and it auto-appears in Settings with a purple "Custom" badge. Chat format auto-detected from filename.
-- **Portable** — no installer, just an exe. Move it anywhere and it keeps working (see below).
-- **First-run model download** — the app downloads what it needs on first launch, no manual setup
-- **Check for updates** built in
+### Voice input
+- **Speech-to-text** via [whisper.cpp](https://github.com/ggerganov/whisper.cpp) — runs offline, multiple model sizes from tiny to large
+- **Configurable hotkeys** — record, inject text, read-aloud, and reformat each have their own global hotkey
+- **Silence detection** — if you stop speaking mid-recording, the app shows a reminder with your stop hotkey. Threshold configurable (10–60s) or disable.
+- **Progress beeps** during transcription, AI formatting, and cloud TTS loading so you know the app is working (toggleable under Sound Effects)
+- **Escape** cancels recording or stops TTS playback — works globally, even when Dictator isn't focused
+
+### AI text formatting
+- **Optional local LLM** via [llama.cpp](https://github.com/ggerganov/llama.cpp) reformats your dictation before insertion. Downloads Phi-3 Mini (~2 GB) on first use.
+- **10 format presets** — 3 cleanup tiers (Light / Clean / Strict), 2 email styles (Casual / Professional), Formal Letter, Bullet Summary, Meeting Notes, Documentation, Message
+- **Fully customizable prompts** — edit the prompt behind any preset
+- **Custom LLM models** — drop any GGUF file in `models/` and it auto-appears in Settings. Phi-3, Llama 3, and ChatML (Mistral/Qwen/Gemma) chat formats supported.
+- **Highlight & reformat** — select text anywhere, press a hotkey, the LLM cleans it in place (Light / Clean / Strict)
+- **System tray format picker** — left-click to toggle auto-format, right-click for the format list. Menu collapses to essentials when auto-format is off.
+
+### Text-to-speech (read-aloud)
+- **Local neural voices** via [Piper](https://github.com/rhasspy/piper) — 10+ downloadable models, custom `.onnx` voices supported
+- **Windows SAPI** fallback — uses voices already on your system
+- **Minimax cloud voices** *(optional, opt-in)* — 18 neural voices. Requires your own Minimax API key. Off by default. When enabled, TTS requests for Minimax voices go to Minimax; Piper and SAPI stay local.
+
+### Phone companion
+- **Any browser, no app install** — open the URL shown in Dictator, bookmark it, you're set
+- **LAN** (same WiFi) or **Tailscale** (remote, trusted HTTPS) — pick whichever fits your setup
+
+### Platform polish
+- **Portable** — single .exe, models live next to it, move the folder, it keeps working. Self-repairs autostart registry when you move the exe.
+- **GPU acceleration (beta)** — automatic [Vulkan](https://www.vulkan.org/) offload for Whisper and LLM. Falls back to CPU cleanly. Works on most modern NVIDIA/AMD/Intel discrete GPUs.
+- **Free GPU toggle** — one click on the main screen unloads models from your GPU so games or other apps can use it
+- **Auto-space** after each insertion (toggleable)
+- **Single instance** — one copy at a time. A second launch tells you to check the tray.
+- **Start minimized** — when autostarted, opens to the tray, not in your face
+- **Dynamic tray menu** — "Cancel Recording" appears only while recording; format items appear only when auto-format is on
+- **First-run model download** — no manual setup
+- **Update check built in** — Settings → Check for Updates
+
+---
 
 ## Minimum Hardware
 
@@ -47,24 +77,26 @@ Voice-to-text for Windows — dictate from your computer with a hotkey, or from 
 | **GPU** | None required | Vulkan-compatible with 6+ GB VRAM (for faster transcription and formatting) |
 | **OS** | Windows 10 | Windows 10/11 |
 
-The base app (speech-to-text only) runs comfortably on modest hardware. AI text formatting loads a ~2 GB language model into RAM, so 8 GB is recommended if you enable that feature. GPU acceleration is automatic when a compatible GPU is detected, but the app works fine without one.
+The base app (speech-to-text only) runs on modest hardware. AI text formatting loads a ~2 GB language model into RAM, so 8 GB is recommended if you enable it. GPU acceleration is automatic when available but not required.
+
+---
 
 ## AI Models
 
-Dictator uses local AI models by default — speech-to-text and AI text formatting both run on your machine, with no cloud calls and no API keys required. The only cloud integration today is optional: if you enable Minimax TTS in Settings with your own API key, text-to-speech requests for that voice are sent to Minimax. Local Piper voices and Windows SAPI stay fully offline.
+Dictator uses local AI models by default — speech-to-text and AI text formatting both run on your machine, with no cloud calls and no API keys required. The only cloud integration today is optional: if you enable Minimax TTS in Settings with your own API key, text-to-speech requests for Minimax voices are sent to Minimax. Local Piper voices and Windows SAPI stay fully offline.
 
 ### Speech-to-text (Whisper)
 The app downloads a Whisper model on first launch (~150 MB for the base English model). Larger models are available in Settings for better accuracy at the cost of speed.
 
 ### Text formatting (LLM)
-When you enable auto-format, the app downloads a ~2 GB language model (Phi-3 Mini Q4). This model reformats your dictated speech — fixing grammar, removing filler words, structuring as emails, etc.
+When you enable auto-format, the app downloads a ~2 GB language model (Phi-3 Mini Q4). This model reformats your dictated speech — fixing grammar, removing fillers, structuring as emails, etc.
 
 ### Custom LLM models
-You can use your own GGUF models for text formatting:
+You can use your own GGUF models:
 
 1. Drop any `.gguf` file into the `models/` folder next to `dictator.exe`
-2. The app auto-detects it and adds it to the model list in Settings
-3. Chat format is auto-detected from the filename, or you can override it in Settings
+2. The app auto-detects it and adds it to the Settings model list
+3. Chat format is auto-detected from the filename, or override it in Settings
 
 **Supported chat formats:**
 
@@ -76,7 +108,7 @@ You can use your own GGUF models for text formatting:
 
 **Tips:**
 - Q4_K_M quantizations offer the best balance of speed and quality
-- Smaller models (1-4B parameters) are faster but less accurate
+- Smaller models (1–4B parameters) are faster but less accurate
 - The app validates GGUF files before loading — corrupted or non-GGUF files are rejected
 
 ### Custom TTS voices
@@ -86,35 +118,41 @@ You can add your own Piper neural voice files:
 2. They auto-appear in the Piper voices list in Settings with a "Custom" badge
 3. Click "Use" to select, or "Delete" to remove
 
-You can find additional Piper voices at [rhasspy/piper](https://github.com/rhasspy/piper/blob/master/VOICES.md).
+Find more Piper voices at [rhasspy/piper](https://github.com/rhasspy/piper/blob/master/VOICES.md).
 
-### GPU Acceleration
+### GPU Acceleration (beta)
 
-Dictator automatically uses your GPU via [Vulkan](https://www.vulkan.org/) for both speech-to-text (Whisper) and AI text formatting (LLM). If a compatible GPU is detected, it's used automatically — no configuration needed. If not, the app falls back to CPU.
+Dictator automatically uses your GPU via [Vulkan](https://www.vulkan.org/) for both speech-to-text and AI text formatting. If a compatible GPU is detected, it's used automatically — no configuration needed. If not, the app falls back to CPU.
 
-GPU acceleration is currently in **beta**. It works well on tested hardware (NVIDIA RTX series), but there are known limitations:
-
-**What works well:**
+**Works well on:**
 - NVIDIA GPUs with 6+ GB VRAM and recent drivers
-- Both Whisper transcription and LLM formatting offloaded to GPU
+- Most modern AMD and Intel discrete GPUs with current drivers
 - Automatic CPU fallback if GPU initialization fails
 
 **Known limitations:**
-- **Low VRAM GPUs** (4 GB or less) — the LLM model alone needs ~3 GB of VRAM. GPUs without enough memory may fail to load the model or produce errors. The app falls back to CPU, but you may see a delay during the failed GPU attempt.
-- **AMD and Intel GPUs** — Vulkan compute support varies. These GPUs may work but are less tested than NVIDIA. Performance may be slower than expected, or GPU initialization may fail silently and fall back to CPU.
-- **Integrated graphics only** (Intel UHD, Intel Iris) — most integrated GPUs lack the VRAM and compute power for LLM inference. The app will fall back to CPU on these systems.
-- **Multi-GPU laptops** (NVIDIA Optimus) — the app may select the integrated GPU instead of the discrete GPU. If GPU performance seems slow, try updating your graphics drivers or setting Dictator to use the high-performance GPU in Windows Graphics Settings.
-- **GPU contention** — if your GPU is already under heavy load (gaming, rendering), there may not be enough VRAM available. The app should fall back to CPU, but you may notice slower startup.
+- **Low-VRAM GPUs** (≤4 GB) — the LLM alone needs ~3 GB of VRAM. GPUs without enough memory may fail to load the model. The app falls back to CPU, but you may see a brief delay during the failed attempt.
+- **Integrated graphics only** (Intel UHD, Intel Iris) — most integrated GPUs lack the VRAM and compute for LLM inference. The app falls back to CPU.
+- **Multi-GPU laptops** (NVIDIA Optimus) — the app may select the integrated GPU instead of the discrete one. If GPU performance seems slow, set Dictator to the high-performance GPU in Windows Graphics Settings.
+- **GPU contention** — if your GPU is already under heavy load (gaming, rendering), there may not be enough VRAM. App should fall back to CPU, but you may notice slower startup.
 
-**If something goes wrong:**
-- Open Settings and enable **Force CPU mode** — this disables GPU for both Whisper and LLM and reloads models on CPU
-- Force CPU mode is the quickest way to rule out GPU-related issues
+**Troubleshooting:**
+- Click **Free GPU** on the main screen — unloads models from the GPU and keeps Dictator on CPU until you toggle it back. Ideal if you want to start a game.
+- Open Settings → enable **Force CPU mode** — same effect, persists across launches
+- If you see "GPU disabled after previous crash," quit from the tray and relaunch, or click **Try GPU Again** in Settings
 
-## In Progress
+---
 
-- **GPU acceleration (beta)** — Vulkan GPU support for faster transcription and LLM formatting. Automatic detection with CPU fallback. See [GPU Acceleration](#gpu-acceleration) for details and known limitations.
-- **Live streaming transcription** — real-time text appearing at your cursor as you speak, instead of waiting until you stop recording.
-- **More cloud TTS providers** — additional cloud voice services beyond Minimax, with API key support for each.
+## Coming Next
+
+The project's active focus areas. No ETAs — these ship when they ship.
+
+- **GPU acceleration (beta) → GA** — finishing resilience work (sleep/resume, driver changes)
+- **Custom dictionary / word bank** — teach the app words Whisper consistently mangles (e.g., "clod" → "Claude")
+- **Transcription history** — local-only log of recent dictations, with one-click re-format without re-speaking
+- **Live streaming transcription** — real-time text as you speak, instead of after you stop
+- **More cloud TTS providers** — additional opt-in voice services beyond Minimax
+
+---
 
 ## Requirements
 
@@ -125,7 +163,7 @@ GPU acceleration is currently in **beta**. It works well on tested hardware (NVI
 ## Getting Started
 
 1. Download the latest `.zip` from the [Releases page](https://github.com/yuanbaca/Dictator-releases/releases/latest)
-2. Extract anywhere on your PC (e.g. `C:\Tools\Dictator\`)
+2. Extract anywhere on your PC (e.g., `C:\Tools\Dictator\`)
 3. Run `dictator.exe`
 4. The app downloads required models on first launch (~150 MB for speech-to-text)
 5. Press `Ctrl+Shift+Space` to start dictating — or open the phone URL shown in the app
@@ -135,8 +173,8 @@ GPU acceleration is currently in **beta**. It works well on tested hardware (NVI
 Dictator is fully portable. If you move the exe to a new folder:
 
 - **Models stay with the exe** — the `models/` folder next to `dictator.exe` is where downloaded models live. Move the whole folder together.
-- **Start with Windows auto-repairs** — if you enabled autostart and then move the exe, Dictator detects the stale path on next launch and automatically updates the registry to the new location. No manual fix needed.
-- **Manual fix (if needed)** — if autostart stops working after a move, just toggle "Start with Windows" off and back on in Settings. Or open the Registry Editor (`Win+R` → `regedit`) and update the path at:
+- **Start with Windows auto-repairs** — if you enabled autostart and then move the exe, Dictator detects the stale path on next launch and updates the registry automatically. No manual fix needed.
+- **Manual fix (if needed)** — toggle "Start with Windows" off and back on in Settings. Or open the Registry Editor (`Win+R` → `regedit`) and update the path at:
   ```
   HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run\Dictator
   ```
@@ -154,7 +192,7 @@ Dictator is fully portable. If you move the exe to a new folder:
 
 Dictator is portable (no installer), so removing it means deleting the files it created:
 
-1. **Before closing** — open Settings and turn off "Start with Windows" if it's enabled. This removes the autostart registry entry for you automatically.
+1. **Before closing** — open Settings and turn off "Start with Windows" if enabled. This removes the autostart registry entry automatically.
 2. **Close Dictator** — right-click the system tray icon → Quit
 3. **Delete the app folder** — wherever you extracted the zip (contains `dictator.exe`, `models/`, `README.txt`)
 4. **Delete app data** — Tauri stores webview cache here:
@@ -164,7 +202,7 @@ Dictator is portable (no installer), so removing it means deleting the files it 
    Open File Explorer, paste that path in the address bar, and delete the folder.
 5. **That's it** — Dictator doesn't install services, drivers, or modify system files.
 
-If you already closed the app without disabling autostart, you can remove the registry entry manually:
+If you already closed the app without disabling autostart, remove the registry entry manually:
 - Press `Win+R`, type `regedit`, press Enter
 - Navigate to: `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run`
 - Delete the entry named `Dictator`

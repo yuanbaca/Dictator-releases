@@ -2,7 +2,7 @@
 
 **What you say goes... (to your cursor)**
 
-Voice-to-text for Windows — dictate from your computer with a hotkey, or from your phone as a wireless mic. Text appears wherever your cursor is. All processing happens locally on your machine. No cloud, no accounts, no data leaves your network.
+Voice-to-text for Windows — dictate from your computer with a hotkey, or from your phone as a wireless mic. Text appears wherever your cursor is. **By default, everything runs locally on your machine — no cloud, no accounts, no data leaves your network.** Cloud text-to-speech (Minimax) is available as an opt-in feature if you supply your own API key; when configured, TTS requests for that voice go to Minimax instead of staying local.
 
 [**Download the latest release**](https://github.com/yuanbaca/Dictator-releases/releases/latest)
 
@@ -51,7 +51,7 @@ The base app (speech-to-text only) runs comfortably on modest hardware. AI text 
 
 ## AI Models
 
-Dictator uses local AI models — everything runs on your machine, nothing is sent to the cloud.
+Dictator uses local AI models by default — speech-to-text and AI text formatting both run on your machine, with no cloud calls and no API keys required. The only cloud integration today is optional: if you enable Minimax TTS in Settings with your own API key, text-to-speech requests for that voice are sent to Minimax. Local Piper voices and Windows SAPI stay fully offline.
 
 ### Speech-to-text (Whisper)
 The app downloads a Whisper model on first launch (~150 MB for the base English model). Larger models are available in Settings for better accuracy at the cost of speed.
